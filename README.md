@@ -66,3 +66,9 @@ view.LoginView
 ## Limits RA1
 
 Aquest projecte no utilitza JDBC, SQL, ORM, MongoDB, serveis externs ni bases de dades. La persistencia ha de quedar limitada a fitxers locals.
+
+Issue 01: executed and give me this:
+
+RA1-ISSUE-03 pendent: encara no s'ha carregat C:\eclipse-workspace\actividad-maven-hugo-limoso\files\items.txt
+Introduïu número d'empleat: 
+
