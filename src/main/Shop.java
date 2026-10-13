@@ -235,7 +235,7 @@ public class Shop {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	*/	
+	*/	 
 		
 		// TODO RA1-ISSUE-04: delegar la conversio de cada linia a parseProductLine.
 		// TODO RA1-ISSUE-11: tractar fitxer absent o error de lectura amb un missatge comprensible.
