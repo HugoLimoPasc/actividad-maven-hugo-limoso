@@ -221,6 +221,8 @@ public class Shop {
 	 */
 	private void readInventory() {
 		
+		//Ruta relativa del fitxer items.txt
+		
 		File f = new File(System.getProperty("user.dir") + File.separator + "files" + File.separator + ITEMS_FILE);
 
 		// TODO RA1-ISSUE-03: obrir el fitxer, llegir-lo linia a linia i afegir cada producte a inventory.

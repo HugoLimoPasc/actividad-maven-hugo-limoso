@@ -12,6 +12,9 @@ public class DaoImplFile implements Dao {
 
 	@Override
 	public void connect() {
+		
+		//Ruta relativa del fitxer users.txt
+		
 		usersFile = new File(System.getProperty("user.dir") + File.separator + "files" + File.separator + "users.txt");
 	}
 

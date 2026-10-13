@@ -72,3 +72,7 @@ Issue 01: executed and give me this:
 RA1-ISSUE-03 pendent: encara no s'ha carregat C:\eclipse-workspace\actividad-maven-hugo-limoso\files\items.txt
 Introduïu número d'empleat: 
 
+ISSUE 02: 
+
+He comprovat que els fitxers .txt er localitcen amb rutes relatives utilitzan el user.dir
+
