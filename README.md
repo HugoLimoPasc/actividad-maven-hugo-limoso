@@ -91,3 +91,33 @@ He comprovat que els fitxers .txt er localitcen amb rutes relatives utilitzan el
 
 -- ISSUE 04
 
+- **Implementa parseProductLine(String line) a Shop.java.**
+  He definit aquest mètode per encarregar-se exclusivament de transformar una línia de text en un objecte, separant així la lògica de lectura de la lògica de conversió.
+
+- **Separa camps i clau/valor, i converteix preu i estoc al tipus adequat.**
+  Mitjançant `.split(";")` i `.split(":")`, tallem el text per extreure les dades de cada camp. Després, convertim el preu a un objecte `Amount` (fent un `Double.parseDouble`) i l'estoc a un nombre enter (`Integer.parseInt`) de forma controlada dins d'un `try-catch`.
+
+- **Retorna un Product i fes que la lectura l'afegeixi quan la línia és vàlida.**
+  El mètode retorna el nou `Product` creat si tot és correcte. Després, al bucle de lectura, comprovem que no sigui nul i l'afegim automàticament a l'inventari de la botiga.
+
+-- ISSUE 05
+
+- **Prepara un exemple de linia incompleta o amb camp invalid.**
+  S'ha provat amb una línia amb un camp invàlid al preu (per exemple: `Item:Ratolí;Wholesaler Price:abc;Stock:5;`) i una altra de tallada o incompleta.
+
+- **Detecta l'error durant la conversio.**
+  Gràcies a les validacions de longitud (`parts.length`) i al bloc `try-catch` que envolta les conversions numèriques (`Double.parseDouble` / `Integer.parseInt`), detectem a l'instant si el format falla.
+
+- **Mostra un missatge comprensible o ignora la linia de forma justificada.**
+  L'aplicació captura l'excepció, mostra un avís per consola clar (indicant quina línia s'ha descartat) i retorna `null`. Així s'evita que el programa es tanqui de cop (es garanteix la robustesa) i l'inventari es carrega amb els productes correctes.
+  
+  -- ISSUE 06
+
+- **Crea o utilitza una accio per afegir producte.**
+  S'ha completat el mètode `addProduct()` buit que ja venia a la plantilla de `Shop.java`, connectant-lo directament amb l'opció 2 del menú principal de la consola.
+
+- **Valida que el producte te dades minimes coherents.**
+  L'aplicació demana el nom, el preu i l'estoc. A més, comprova prèviament mitjançant `findProduct()` que no s'afegeixi un producte repetit amb el mateix nom i controla que s'insereixi correctament a l'ArrayList de l'inventari.
+
+- **Mostra el producte nou dins l'inventari en memoria.**
+  Un cop introduït, el producte queda registrat a l'execució actual i es pot veure a l'instant en triar l'opció de veure l'inventari (`showInventory()`), sense necessitat de reiniciar el programa.

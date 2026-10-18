@@ -225,10 +225,13 @@ public class Shop {
 	    try (BufferedReader br = new BufferedReader(new FileReader(f))) {
 	        String line;
 	        while ((line = br.readLine()) != null) {
-	            // TODO RA1-ISSUE-04: cridar a parseProductLine(line) per convertir i afegir a l'inventari
+	            // Cridem el parser per convertir la línia en un Product
+	            Product product = parseProductLine(line);
+	            if (product != null) {
+	                addProduct(product); // Afegim el producte a l'inventari de la botiga
+	            }
 	        }
 	    } catch (IOException e) {
-	        // Si no es troba el fitxer o hi ha un error de lectura, ho capturem aquí
 	        System.out.println("No s'ha pogut llegir el fitxer d'inventari: " + e.getMessage());
 	    }
 	}
@@ -237,9 +240,37 @@ public class Shop {
 	 * Convert a valid line from items.txt into a Product.
 	 */
 	private Product parseProductLine(String line) {
-		// TODO RA1-ISSUE-04: validar camps, convertir preu i estoc, i retornar un Product.
-		// TODO RA1-ISSUE-05: decidir com es tracten les linies mal formades.
-		return null;
+	    try {
+	        // 1. Dividim la línia pel punt i coma (;)
+	        String[] parts = line.split(";");
+	        
+	        // Assegurem-nos que té almenys 3 parts per no tenir errors
+	        if (parts.length < 3) {
+	            System.out.println("[Avis] Línia ignorada per format incomplet: " + line);
+	            return null;
+	        }
+
+	        // 2. Extraure el nom (part 0): "Item:SSD 1TB" -> ens quedem amb "SSD 1TB"
+	        String name = parts[0].split(":")[1].trim();
+
+	        // 3. Extraure el preu (part 1): "Wholesaler Price:60.00" -> ens quedem amb "60.00"
+	        String priceStr = parts[1].split(":")[1].trim();
+	        double priceValue = Double.parseDouble(priceStr);
+	        Amount price = new Amount(priceValue);
+
+	        // 4. Extraure l'estoc (part 2): "Stock:8" -> ens quedem amb "8"
+	        String stockStr = parts[2].split(":")[1].trim();
+	        int stock = Integer.parseInt(stockStr);
+
+	        // 5. Retornem el Product nou creat
+	        // (Nota: depenent del teu constructor de Product, pot portar els paràmetres així)
+	        return new Product(name, price, true, stock);
+
+	    } catch (Exception e) {
+	        // Capturem qualsevol error (format de preu/estoc invàlid, divisió incorrecta, etc.)
+	        System.out.println("[Avis] S'ha ignorat una línia errònia del fitxer: \"" + line + "\"");
+	        return null;
+	    }
 	}
 
 	/**
@@ -261,8 +292,32 @@ public class Shop {
 	 * add a new product to inventory getting data from console
 	 */
 	public void addProduct() {
-		// TODO RA1-ISSUE-06: demanar dades minimes, crear un Product i afegir-lo a inventory.
-		System.out.println("RA1-ISSUE-06 pendent: encara no es poden afegir articles.");
+	    Scanner scanner = CONSOLE;
+	    
+	    // 1. Demanar dades mínimes per consola
+	    System.out.print("Introdueix el nom del nou article: ");
+	    String name = scanner.next();
+	    
+	    // Comprovar si ja existeix un producte amb el mateix nom
+	    if (findProduct(name) != null) {
+	        System.out.println("Error: Ja existeix un producte amb aquest nom.");
+	        return;
+	    }
+
+	    System.out.print("Introdueix el preu majorista (Wholesaler Price): ");
+	    double priceVal = scanner.nextDouble();
+	    Amount price = new Amount(priceVal);
+
+	    System.out.print("Introdueix l'estoc inicial: ");
+	    int stock = scanner.nextInt();
+
+	    // 2. Crear el nou Producte (amb disponible a true per defecte)
+	    Product newProduct = new Product(name, price, true, stock);
+
+	    // 3. Afegir-lo a l'inventari en memòria utilitzant el mètode existent
+	    addProduct(newProduct);
+	    
+	    System.out.println("Producte afegit correctament a l'inventari en memòria!");
 	}
 
 	/**
