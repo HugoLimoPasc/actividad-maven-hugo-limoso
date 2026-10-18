@@ -69,10 +69,25 @@ Aquest projecte no utilitza JDBC, SQL, ORM, MongoDB, serveis externs ni bases de
 
 Issue 01: executed and give me this:
 
-RA1-ISSUE-03 pendent: encara no s'ha carregat C:\eclipse-workspace\actividad-maven-hugo-limoso\files\items.txt
+-- ISSUE-01 
+
+Pendent: encara no s'ha carregat C:\eclipse-workspace\actividad-maven-hugo-limoso\files\items.txt
 Introduïu número d'empleat: 
 
-ISSUE 02: 
+-- ISSUE 02: 
 
 He comprovat que els fitxers .txt er localitcen amb rutes relatives utilitzan el user.dir
+
+-- ISSUE 03
+
+- **Obre el fitxer amb un BufferedReader dins d'un try-with-resources:**
+  S'ha fet servir un bloc `try (BufferedReader br = new BufferedReader(new FileReader(f)))`. Això va de conya perquè Java s'encarrega de tancar el fitxer automàticament en acabar (o si peta res), evitant deixar fluxos oberts innecessàriament.
+
+- **Llegeix i tracta cada línia com a text:**
+  Amb un bucle `while ((line = br.readLine()) != null)`, anem llegint el fitxer `items.txt` de dalt a baix, línia a línia i de forma seqüencial, tractant cada una simplement com un `String` de text pla sense modificar-la.
+
+- **Deixa preparada la crida a la conversió que completaràs a RA1-ISSUE-04:**
+  Dins del bucle he deixat l'estructura llesta amb un comentari a punt, a l'espera de cridar el mètode de conversió (`parseProductLine`) que farem a la següent issue. De moment no s'interpreta cap dada.
+
+-- ISSUE 04
 
