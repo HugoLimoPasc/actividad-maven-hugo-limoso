@@ -234,6 +234,13 @@ public class Shop {
 	    } catch (IOException e) {
 	        System.out.println("No s'ha pogut llegir el fitxer d'inventari: " + e.getMessage());
 	    }
+	    
+	    System.out.println("--- Productes actuals a l'inventari ---");
+	    for (Product p : inventory) { // (assegura't que la teva llista es diu 'inventory')
+	        if (p != null) {
+	            System.out.println("- " + p.getName());
+	        }
+	    }
 	}
 
 	/**
@@ -332,8 +339,26 @@ public class Shop {
 	 * add stock for a specific product
 	 */
 	public void addStock() {
-		// TODO RA1-ISSUE-07: trobar un Product i actualitzar el seu estoc.
-		System.out.println("RA1-ISSUE-07 pendent: encara no es pot modificar l'estoc.");
+	    Scanner scanner = CONSOLE; // O el sc que facis servir a la classe
+	    
+	    System.out.print("Introdueix el nom del producte del qual vols modificar l'estoc: ");
+	    String name = scanner.next();
+	    
+	    // 1. Busquem el producte a l'inventari
+	    Product product = findProduct(name);
+	    
+	    if (product != null) {
+	        // 2. Demanar el nou estoc
+	        System.out.print("Introdueix la nova quantitat d'estoc: ");
+	        int newStock = scanner.nextInt();
+	        
+	        // 3. Actualitzar l'estoc (assegura't que el mètode es diu setStock al teu Product)
+	        product.setStock(newStock);
+	        
+	        System.out.println("Estoc actualitzat correctament per a: " + product.getName());
+	    } else {
+	        System.out.println("Error: No s'ha trobat cap producte amb el nom \"" + name + "\".");
+	    }
 	}
 
 	/**
