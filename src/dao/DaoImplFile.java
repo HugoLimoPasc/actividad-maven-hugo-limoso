@@ -15,7 +15,7 @@ public class DaoImplFile implements Dao {
 		
 		//Ruta relativa del fitxer users.txt
 		
-		usersFile = new File(System.getProperty("user.dir") + File.separator + "files" + File.separator + "users.txt");
+		usersFile = new File(System.getProperty("user.dir") + File.separator + "src" + File.separator + "model" + File.separator + "files" + File.separator + "users.txt");
 	}
 
 	@Override

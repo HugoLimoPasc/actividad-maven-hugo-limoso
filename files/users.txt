@@ -1,2 +1,0 @@
-Employee:1001;Name:Admin ComputerCenter;Password:admin;
-Employee:1002;Name:Tecnic Taller;Password:repair;

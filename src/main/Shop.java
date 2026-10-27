@@ -40,6 +40,8 @@ public class Shop {
 	public Amount getCash() {
 		return cash;
 	}
+	
+	
 
 
 
@@ -98,6 +100,7 @@ public class Shop {
 
 
 	public static void main(String[] args) {
+		
 		Shop shop = new Shop();
 
 		// load inventory from external data
@@ -216,70 +219,49 @@ public class Shop {
 		this.readInventory();
 	}
 
+	
 	/**
 	 * read inventory from file
 	 */
 	private void readInventory() {
-	    File f = new File(System.getProperty("user.dir") + File.separator + "files" + File.separator + ITEMS_FILE);
+		
+		 File f = new File(System.getProperty("user.dir") + File.separator + "src" + File.separator + "model" + File.separator + "files" + File.separator + ITEMS_FILE);
+		 
+		 if (!f.exists()) {
+			    System.out.println("No s'ha trobat el fitxer d'articles");
+			}
 
-	    try (BufferedReader br = new BufferedReader(new FileReader(f))) {
-	        String line;
-	        while ((line = br.readLine()) != null) {
-	            // Cridem el parser per convertir la línia en un Product
-	            Product product = parseProductLine(line);
-	            if (product != null) {
-	                addProduct(product); // Afegim el producte a l'inventari de la botiga
-	            }
-	        }
-	    } catch (IOException e) {
-	        System.out.println("No s'ha pogut llegir el fitxer d'inventari: " + e.getMessage());
-	    }
-	    
-	    System.out.println("--- Productes actuals a l'inventari ---");
-	    for (Product p : inventory) { // (assegura't que la teva llista es diu 'inventory')
-	        if (p != null) {
-	            System.out.println("- " + p.getName());
-	        }
-	    }
-	}
+			if (!f.canRead()) {
+			    System.out.println("El fitxer no es pot llegir");
+			}
+		 
+
+		// TODO RA1-ISSUE-03: obrir el fitxer, llegir-lo linia a linia i afegir cada producte a inventory.
+			try (BufferedReader reader = new BufferedReader(new FileReader(f))) {
+			    String line;
+			    while ((line = reader.readLine()) != null) {
+			        
+			    }
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			}
+		
+		
+		// TODO RA1-ISSUE-04: delegar la conversio de cada linia a parseProductLine.
+		// TODO RA1-ISSUE-11: tractar fitxer absent o error de lectura amb un missatge comprensible.
+	
 
 	/**
 	 * Convert a valid line from items.txt into a Product.
 	 */
 	private Product parseProductLine(String line) {
-	    try {
-	        // 1. Dividim la línia pel punt i coma (;)
-	        String[] parts = line.split(";");
-	        
-	        // Assegurem-nos que té almenys 3 parts per no tenir errors
-	        if (parts.length < 3) {
-	            System.out.println("[Avis] Línia ignorada per format incomplet: " + line);
-	            return null;
-	        }
-
-	        // 2. Extraure el nom (part 0): "Item:SSD 1TB" -> ens quedem amb "SSD 1TB"
-	        String name = parts[0].split(":")[1].trim();
-
-	        // 3. Extraure el preu (part 1): "Wholesaler Price:60.00" -> ens quedem amb "60.00"
-	        String priceStr = parts[1].split(":")[1].trim();
-	        double priceValue = Double.parseDouble(priceStr);
-	        Amount price = new Amount(priceValue);
-
-	        // 4. Extraure l'estoc (part 2): "Stock:8" -> ens quedem amb "8"
-	        String stockStr = parts[2].split(":")[1].trim();
-	        int stock = Integer.parseInt(stockStr);
-
-	        // 5. Retornem el Product nou creat
-	        // (Nota: depenent del teu constructor de Product, pot portar els paràmetres així)
-	        return new Product(name, price, true, stock);
-
-	    } catch (Exception e) {
-	        // Capturem qualsevol error (format de preu/estoc invàlid, divisió incorrecta, etc.)
-	        System.out.println("[Avis] S'ha ignorat una línia errònia del fitxer: \"" + line + "\"");
-	        return null;
-	    }
+		// TODO RA1-ISSUE-04: validar camps, convertir preu i estoc, i retornar un Product.
+		// TODO RA1-ISSUE-05: decidir com es tracten les linies mal formades.
+		return null;
 	}
-
 	/**
 	 * Save the current inventory to items.txt.
 	 */
@@ -299,32 +281,8 @@ public class Shop {
 	 * add a new product to inventory getting data from console
 	 */
 	public void addProduct() {
-	    Scanner scanner = CONSOLE;
-	    
-	    // 1. Demanar dades mínimes per consola
-	    System.out.print("Introdueix el nom del nou article: ");
-	    String name = scanner.next();
-	    
-	    // Comprovar si ja existeix un producte amb el mateix nom
-	    if (findProduct(name) != null) {
-	        System.out.println("Error: Ja existeix un producte amb aquest nom.");
-	        return;
-	    }
-
-	    System.out.print("Introdueix el preu majorista (Wholesaler Price): ");
-	    double priceVal = scanner.nextDouble();
-	    Amount price = new Amount(priceVal);
-
-	    System.out.print("Introdueix l'estoc inicial: ");
-	    int stock = scanner.nextInt();
-
-	    // 2. Crear el nou Producte (amb disponible a true per defecte)
-	    Product newProduct = new Product(name, price, true, stock);
-
-	    // 3. Afegir-lo a l'inventari en memòria utilitzant el mètode existent
-	    addProduct(newProduct);
-	    
-	    System.out.println("Producte afegit correctament a l'inventari en memòria!");
+		// TODO RA1-ISSUE-06: demanar dades minimes, crear un Product i afegir-lo a inventory.
+		System.out.println("RA1-ISSUE-06 pendent: encara no es poden afegir articles.");
 	}
 
 	/**
@@ -339,26 +297,8 @@ public class Shop {
 	 * add stock for a specific product
 	 */
 	public void addStock() {
-	    Scanner scanner = CONSOLE; // O el sc que facis servir a la classe
-	    
-	    System.out.print("Introdueix el nom del producte del qual vols modificar l'estoc: ");
-	    String name = scanner.next();
-	    
-	    // 1. Busquem el producte a l'inventari
-	    Product product = findProduct(name);
-	    
-	    if (product != null) {
-	        // 2. Demanar el nou estoc
-	        System.out.print("Introdueix la nova quantitat d'estoc: ");
-	        int newStock = scanner.nextInt();
-	        
-	        // 3. Actualitzar l'estoc (assegura't que el mètode es diu setStock al teu Product)
-	        product.setStock(newStock);
-	        
-	        System.out.println("Estoc actualitzat correctament per a: " + product.getName());
-	    } else {
-	        System.out.println("Error: No s'ha trobat cap producte amb el nom \"" + name + "\".");
-	    }
+		// TODO RA1-ISSUE-07: trobar un Product i actualitzar el seu estoc.
+		System.out.println("RA1-ISSUE-07 pendent: encara no es pot modificar l'estoc.");
 	}
 
 	/**
