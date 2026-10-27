@@ -240,7 +240,8 @@ public class Shop {
 			try (BufferedReader reader = new BufferedReader(new FileReader(f))) {
 			    String line;
 			    while ((line = reader.readLine()) != null) {
-			        
+			        System.out.println(line);
+			        Product product = parseProductLine(line);
 			    }
 
 		} catch (IOException e) {
