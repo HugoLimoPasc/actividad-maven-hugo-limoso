@@ -91,3 +91,8 @@ Això permet detectar línies mal formades, ignorar-les de manera controlada i m
 
 --- ISSUE 06 ---
 
+S'ha desenvolupat la funcionalitat completa per afegir nous productes de manera dinàmica des de la consola sense reiniciar l'aplicació. El sistema valida pas a pas que el nom no estigui 
+duplicat i que tant el preu com l'estoc siguin numèrics i coherents, evitant errors d'execució. Això garanteix la robustesa de l'inventari en memòria abans de desar-lo definitivament al fitxer.
+
+--- ISSUE 07 ---
+

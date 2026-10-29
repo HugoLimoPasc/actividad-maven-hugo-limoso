@@ -273,7 +273,7 @@ public class Shop {
 			String name = parts[0].split(":")[1].trim();
 			double wholesalerPrice = Double.parseDouble(parts[1].split(":")[1].trim());
 			int stock = Integer.parseInt(parts[2].split(":")[1].trim());
-
+	
 			return new Product(name, new Amount(wholesalerPrice), true, stock);
 			
 		} catch (Exception e) {
@@ -303,9 +303,62 @@ public class Shop {
 	 * add a new product to inventory getting data from console
 	 */
 	public void addProduct() {
-		// TODO RA1-ISSUE-06: demanar dades minimes, crear un Product i afegir-lo a inventory.
-		System.out.println("RA1-ISSUE-06 pendent: encara no es poden afegir articles.");
+		Scanner scanner = CONSOLE;
+		String name = "";
+		
+		scanner.nextLine();
+		
+		do {
+			System.out.print("Introdueix el nom del producte: ");
+			name = scanner.nextLine();
+
+			if (findProduct(name) != null) {
+				System.out.println("Error: Aquest producte ja està en l'inventari. Torna-ho a provar.");
+			}
+			
+		} while (findProduct(name) != null);
+		
+		double wholesalerPrice = 0;
+		boolean validPrice = false;
+		do {
+			System.out.print("Introdueix el preu: ");
+			if (scanner.hasNextDouble()) {
+				wholesalerPrice = scanner.nextDouble();
+				if (wholesalerPrice < 0) {
+					System.out.println("Error: El preu no pot ser negatiu.");
+				} else {
+					validPrice = true;
+				}
+			} else {
+				System.out.println("Error: El preu ha de ser un número.");
+				scanner.next();
+			}
+		} while (!validPrice || wholesalerPrice < 0);
+		
+		int stock = 0;
+		boolean validStock = false;
+		do {
+			System.out.print("Introdueix l'estoc inicial: ");
+			if (scanner.hasNextInt()) {
+				stock = scanner.nextInt();
+				if (stock < 0) {
+					System.out.println("Error: L'estoc no pot ser negatiu.");
+				} else {
+					validStock = true;
+				}
+			} else {
+				System.out.println("Error: L'estoc ha de ser un número enter.");
+				scanner.next();
+			}
+		} while (!validStock || stock < 0);
+
+		Product newProduct = new Product(name, new Amount(wholesalerPrice), true, stock);
+
+		addProduct(newProduct);
+		System.out.println("Producte afegit correctament a l'inventari!");
 	}
+		
+		
 
 	/**
 	 * remove a new product to inventory getting data from console
