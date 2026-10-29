@@ -69,12 +69,10 @@ Aquest projecte no utilitza JDBC, SQL, ORM, MongoDB, serveis externs ni bases de
 
 --- ISSUE 01 ---
 
--- ISSUE-01 
-
 Pendent: encara no s'ha carregat C:\eclipse-workspace\actividad-maven-hugo-limoso\files\items.txt
 Introduïu número d'empleat: 
 
--- ISSUE 02 --- 
+--- ISSUE 02 --- 
 
 He comprovat que els fitxers .txt es localitcen amb rutes relatives utilitzan el user.dir
 
@@ -82,6 +80,14 @@ He comprovat que els fitxers .txt es localitcen amb rutes relatives utilitzan el
 
 He obert el fitxer amb un try-with-resources per assegurar que es tanca sol, l'he anat llegint línia a línia i he deixat la crida al mètode parseProductLine a punt per a la següent issue.
 
--- ISSUE 04 ---
+--- ISSUE 04 ---
 
+S'ha implementat el mètode parseProductLine per convertir cada línia vàlida d'text en un objecte Product i afegir-lo automàticament a l'inventari.
+
+--- ISSUE 05 ---
+
+S'ha afegit robustesa al mètode parseProductLine mitjançant un bloc try-catch i validacions de longitud. 
+Això permet detectar línies mal formades, ignorar-les de manera controlada i mostrar un avís sense que l'aplicació es tanqui.
+
+--- ISSUE 06 ---
 

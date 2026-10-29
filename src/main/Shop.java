@@ -240,7 +240,6 @@ public class Shop {
 			try (BufferedReader reader = new BufferedReader(new FileReader(f))) {
 			    String line;
 			    while ((line = reader.readLine()) != null) {
-			        System.out.println(line);
 			        Product product = parseProductLine(line);
 			        if (product != null) {
 			            addProduct(product);
@@ -267,23 +266,19 @@ public class Shop {
 			
 			String[] parts = line.split(";");
 			
-			
 			if (parts.length != 3) {
-				return null;
+				throw new IllegalArgumentException();
 			}
-
 			
 			String name = parts[0].split(":")[1].trim();
 			double wholesalerPrice = Double.parseDouble(parts[1].split(":")[1].trim());
 			int stock = Integer.parseInt(parts[2].split(":")[1].trim());
-			
-
 
 			return new Product(name, new Amount(wholesalerPrice), true, stock);
 			
 		} catch (Exception e) {
 		
-			System.out.println("Error: " + line);
+			System.out.println("[ERROR] S'ha ignorat una línia mal formada: \"" + line + "\"");
 			return null;
 		}
 		
