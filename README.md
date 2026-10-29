@@ -100,4 +100,4 @@ S'ha desenvolupat el mètode addStock() per actualitzar de manera interactiva i 
 que la quantitat introduïda sigui un enter vàlid i evita estocs negatius. Això permet modificar les quantitats a l'instant sense reiniciar l'aplicació ni alterar la resta de dades de l'inventari.
 
 --- ISSUE 08 ---
-
+ 
