@@ -96,3 +96,8 @@ duplicat i que tant el preu com l'estoc siguin numèrics i coherents, evitant er
 
 --- ISSUE 07 ---
 
+S'ha desenvolupat el mètode addStock() per actualitzar de manera interactiva i segura l'estoc d'un producte existent a la memòria. El programa valida pas a pas que el producte existeixi, 
+que la quantitat introduïda sigui un enter vàlid i evita estocs negatius. Això permet modificar les quantitats a l'instant sense reiniciar l'aplicació ni alterar la resta de dades de l'inventari.
+
+--- ISSUE 08 ---
+
