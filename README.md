@@ -101,3 +101,7 @@ que la quantitat introduïda sigui un enter vàlid i evita estocs negatius. Aix�
 
 --- ISSUE 08 ---
  
+S'ha desenvolupat el mètode removeProduct() per permetre l'eliminació d'articles de l'inventari en memòria durant l'execució. El sistema valida interactivament que el producte existeixi 
+abans de procedir i utilitza el mètode .remove() de la col·lecció per esborrar-lo. Aquesta operació garanteix que l'element seleccionat desaparegui sense alterar ni corrompre la resta de 
+productes emmagatzemats.
+
