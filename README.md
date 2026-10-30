@@ -105,3 +105,9 @@ S'ha desenvolupat el mètode removeProduct() per permetre l'eliminació d'articl
 abans de procedir i utilitza el mètode .remove() de la col·lecció per esborrar-lo. Aquesta operació garanteix que l'element seleccionat desaparegui sense alterar ni corrompre la resta de 
 productes emmagatzemats.
 
+--- ISSUE 09 ---
+
+S'ha implementat el mètode saveInventory() per persistir l'estat actual de l'inventari en memòria directament al fitxer items.txt utilitzant la ruta configurada del projecte. Mitjançant 
+PrintWriter es formateja cada producte en una línia de text estructurada, assegurant que no es perdi cap dada modificada. Això permet conservar els canvis de manera permanent i 
+recuperar-los automàticament al reiniciar l'aplicació.
+

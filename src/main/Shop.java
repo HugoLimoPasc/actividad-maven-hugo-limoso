@@ -288,8 +288,17 @@ public class Shop {
 	 * Save the current inventory to items.txt.
 	 */
 	public void saveInventory() {
-		// TODO RA1-ISSUE-09: convertir cada Product en una linia i reescriure items.txt.
-		System.out.println("RA1-ISSUE-09 pendent: encara no s'ha desat l'inventari.");
+		String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "model" + File.separator + "files" + File.separator + ITEMS_FILE;
+
+		try (PrintWriter pw = new PrintWriter(new FileWriter(filePath))) {
+			for (Product product : inventory) {
+				String line = "Item:" + product.getName() + ";Wholesaler Price:" + product.getWholesalerPrice().getValue() + ";Stock:" + product.getStock();
+				pw.println(line);
+			}
+			System.out.println("Inventari desat correctament al fitxer.");
+		} catch (IOException e) {
+			System.out.println("Error: No s'ha pogut desar l'inventari al fitxer.");
+		}
 	}
 
 	/**
