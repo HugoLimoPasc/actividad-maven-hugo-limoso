@@ -224,33 +224,30 @@ public class Shop {
 	 * read inventory from file
 	 */
 	private void readInventory() {
+		File f = new File(System.getProperty("user.dir") + File.separator + "src" + File.separator + "model" + File.separator + "files" + File.separator + ITEMS_FILE);
 		
-		 File f = new File(System.getProperty("user.dir") + File.separator + "src" + File.separator + "model" + File.separator + "files" + File.separator + ITEMS_FILE);
-		 
-		 if (!f.exists()) {
-			    System.out.println("No s'ha trobat el fitxer d'articles");
-			}
-
-			if (!f.canRead()) {
-			    System.out.println("El fitxer no es pot llegir");
-			}
-		 
-
-		// TODO RA1-ISSUE-03: obrir el fitxer, llegir-lo linia a linia i afegir cada producte a inventory.
-			try (BufferedReader reader = new BufferedReader(new FileReader(f))) {
-			    String line;
-			    while ((line = reader.readLine()) != null) {
-			        Product product = parseProductLine(line);
-			        if (product != null) {
-			            addProduct(product);
-			        }
-			    }
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (!f.exists()) {
+			System.out.println("Error: No s'ha trobat el fitxer d'articles. S'iniciarà amb l'inventari buit.");
+			return;
 		}
+
+		if (!f.canRead()) {
+			System.out.println("Error: El fitxer no es pot llegir per falta de permisos.");
+			return;
+		}
+
+		try (BufferedReader reader = new BufferedReader(new FileReader(f))) {
+			String line;
+			while ((line = reader.readLine()) != null) {
+				Product product = parseProductLine(line);
+				if (product != null) {
+					addProduct(product);
+				}
 			}
+		} catch (IOException e) {
+			System.out.println("Error: S'ha produït un problema en llegir el fitxer de dades.");
+		}
+	}
 		
 		
 		// TODO RA1-ISSUE-04: delegar la conversio de cada linia a parseProductLine.

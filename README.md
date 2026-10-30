@@ -111,3 +111,14 @@ S'ha implementat el mètode saveInventory() per persistir l'estat actual de l'in
 PrintWriter es formateja cada producte en una línia de text estructurada, assegurant que no es perdi cap dada modificada. Això permet conservar els canvis de manera permanent i 
 recuperar-los automàticament al reiniciar l'aplicació.
 
+--- ISSUE 10 ---
+
+S'ha dut a prova la persistència real de l'aplicació realitzant modificacions a l'inventari (com afegir o modificar productes) i desant-les al fitxer items.txt. En tancar i reiniciar 
+completament el programa, s'ha comprovat que les dades es carreguen de manera automàtica en iniciar-se. Això valida que el sistema desa i recupera la informació de manera robusta 
+entre diferents execucions sense perdre cap canvi.
+
+--- ISSUE 11 ---
+
+S'ha actualitzat el mètode readInventory() per gestionar de manera robusta l'absència o la impossibilitat de lectura del fitxer items.txt. Mitjançant validacions prèvies i un bloc 
+de captura d'excepcions controlat, s'evita la fallada abrupta de l'aplicació i es mostra un missatge informatiu a l'usuari. Això garanteix que el programa pugui continuar funcionant 
+de manera estable fins i tot quan el fitxer de dades no està disponible.
